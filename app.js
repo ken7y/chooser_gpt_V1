@@ -130,8 +130,6 @@ function selectRandomFinger() {
   const touchElement = touchElements[selectedTouch.identifier];
 
   if (touchElement) {
-    touchElement.style.transform = 'translate(-50%, -50%) scale(1)';
-    touchElement.style.animation = 'none';
     touchElement.classList.add('selected');
 
     for (let touch of currentTouches) {
