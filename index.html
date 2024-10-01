@@ -3,48 +3,70 @@
 <head>
   <title>Random Finger Selector</title>
   <style>
-    /* Styles to make the touch area full-screen */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    #touchArea {
-      width: 100%;
-      height: 100%;
-      background-color: #f0f0f0;
-      position: relative;
-      overflow: hidden;
-      touch-action: none; /* Prevent default touch actions */
-    }
-    .touch-point {
-      width: 50px;
-      height: 50px;
-      background-color: rgba(0, 150, 136, 0.7);
-      border-radius: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-    }
-    /* Loading animation (to be applied after stabilization) */
-    .loading {
-      animation: loading 2s forwards;
-    }
-    @keyframes loading {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(10);
-      }
-    }
-    /* Style for the selected touch point */
-    .selected {
-      background-color: red !important;
-      width: 100px;
-      height: 100px;
-      transform: translate(-50%, -50%) scale(7);
-      z-index: 10; /* Bring selected finger to the front */
-    }
+  /* Existing styles */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#touchArea {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.touch-point {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 150, 136, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: pulse 1s infinite; /* Initial pulsating animation */
+}
+
+/* Initial Pulsating Animation */
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(14);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Loading Animation (overrides initial animation) */
+.loading {
+  animation: loading 2s forwards;
+}
+
+@keyframes loading {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(7);
+  }
+}
+
+/* Style for the selected touch point */
+.selected {
+  background-color: red !important;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%) scale(1);
+  animation: none;
+  z-index: 10;
+}
+
   </style>
 </head>
 <body>

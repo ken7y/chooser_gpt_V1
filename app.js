@@ -94,6 +94,7 @@ function startLoadingAnimation() {
   for (let touch of currentTouches) {
     const touchElement = touchElements[touch.identifier];
     if (touchElement) {
+      // Override the initial pulsating animation
       touchElement.classList.add('loading');
     }
   }
@@ -120,7 +121,9 @@ function cancelLoading() {
     const touchElement = touchElements[touch.identifier];
     if (touchElement) {
       touchElement.classList.remove('loading');
+      // Reset to initial state with pulsating animation
       touchElement.style.transform = 'translate(-50%, -50%) scale(1)';
+      touchElement.style.animation = 'pulse 1s infinite';
     }
   }
 }
@@ -137,6 +140,7 @@ function selectRandomFinger() {
     // Remove loading animation classes
     touchElement.classList.remove('loading');
     touchElement.style.transform = 'translate(-50%, -50%) scale(1)';
+    touchElement.style.animation = 'none';
 
     // Add the 'selected' class to change its appearance
     touchElement.classList.add('selected');
