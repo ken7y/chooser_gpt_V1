@@ -81,7 +81,7 @@ function resetDebounceTimer() {
     if (currentTouches.length > 0) {
       startLoadingAnimation();
     }
-  }, 1000);
+  }, 1500);
 }
 
 function startLoadingAnimation() {
@@ -100,24 +100,14 @@ function startLoadingAnimation() {
     if (isLoading) {
       selectRandomFinger();
     }
-  }, 2000);
+  }, 1500);
 }
 
 function cancelLoading() {
   isLoading = false;
-
   if (loadingTimeout) {
     clearTimeout(loadingTimeout);
     loadingTimeout = null;
-  }
-
-  for (let touch of currentTouches) {
-    const touchElement = touchElements[touch.identifier];
-    if (touchElement) {
-      touchElement.classList.remove('loading');
-      touchElement.classList.add('touch-point'); // Re-add initial animation
-      touchElement.style.transform = 'translate(-50%, -50%) scale(1)';
-    }
   }
 }
 
@@ -130,8 +120,8 @@ function selectRandomFinger() {
   const touchElement = touchElements[selectedTouch.identifier];
 
   if (touchElement) {
-    touchElement.style.transform = 'translate(-50%, -50%) scale(7)';
-    touchElement.style.animation = 'none';
+    // touchElement.style.transform = 'translate(-50%, -50%) scale(7)';
+    // touchElement.style.animation = 'none';
     touchElement.classList.add('selected');
 
     for (let touch of currentTouches) {
