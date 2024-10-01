@@ -3,7 +3,7 @@
 <head>
   <title>Random Finger Selector</title>
   <style>
-    /* Updated CSS Styles */
+    /* Styles to make the touch area full-screen */
     body, html {
       margin: 0;
       padding: 0;
@@ -24,25 +24,25 @@
       border-radius: 50%;
       position: absolute;
       transform: translate(-50%, -50%);
-      animation: loading 1s infinite;
+    }
+    /* Loading animation (to be applied after stabilization) */
+    .loading {
+      animation: loading 2s forwards;
     }
     @keyframes loading {
       0% {
         transform: translate(-50%, -50%) scale(1);
       }
-      50% {
-        transform: translate(-50%, -50%) scale(14);
-      }
       100% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(10);
       }
     }
+    /* Style for the selected touch point */
     .selected {
-      background-color: red !important; /* Change color to red upon selection */
+      background-color: red !important;
       width: 100px;
       height: 100px;
-      animation: none; /* Stop the loading animation */
-      transform: translate(-50%, -50%) scale(7); /* Reset scale */
+      transform: translate(-50%, -50%) scale(7);
       z-index: 10; /* Bring selected finger to the front */
     }
   </style>
