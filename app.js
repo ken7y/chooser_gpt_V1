@@ -1,3 +1,4 @@
+"use strict";
 var touchArea = document.getElementById("touchArea");
 var currentTouches = [];
 var touchElements = {};
@@ -15,8 +16,8 @@ function handleTouchStart(event) {
     if (isLoading) {
         cancelLoading();
     }
-    for (var _i = 0, _a = Array.from(event.changedTouches); _i < _a.length; _i++) {
-        var touch = _a[_i];
+    for (var i = 0; i < event.changedTouches.length; i++) {
+        var touch = event.changedTouches[i];
         var touchElement = document.createElement("div");
         touchElement.classList.add("touch-point");
         touchElement.style.left = "".concat(touch.clientX, "px");
@@ -32,8 +33,8 @@ function handleTouchStart(event) {
 // Handle touch move event
 function handleTouchMove(event) {
     event.preventDefault();
-    for (var _i = 0, _a = Array.from(event.changedTouches); _i < _a.length; _i++) {
-        var touch = _a[_i];
+    for (var i = 0; i < event.changedTouches.length; i++) {
+        var touch = event.changedTouches[i];
         var touchElement = touchElements[touch.identifier];
         if (touchElement) {
             touchElement.style.left = "".concat(touch.clientX, "px");
@@ -48,7 +49,8 @@ function handleTouchEnd(event) {
     if (isLoading) {
         cancelLoading();
     }
-    var _loop_1 = function (touch) {
+    var _loop_1 = function (i) {
+        var touch = event.changedTouches[i];
         var touchElement = touchElements[touch.identifier];
         if (touchElement) {
             touchArea.removeChild(touchElement);
@@ -56,9 +58,8 @@ function handleTouchEnd(event) {
         }
         currentTouches = currentTouches.filter(function (t) { return t.identifier !== touch.identifier; });
     };
-    for (var _i = 0, _a = Array.from(event.changedTouches); _i < _a.length; _i++) {
-        var touch = _a[_i];
-        _loop_1(touch);
+    for (var i = 0; i < event.changedTouches.length; i++) {
+        _loop_1(i);
     }
     resetDebounceTimer();
 }

@@ -1,10 +1,8 @@
 # Ignore the dist directory, where compiled files go
+dist/
 
 # Ignore the node_modules directory, which contains dependencies
 node_modules/
-
-# Ignore compiled JavaScript files if you don't want to track the compiled output
-*.js
 
 # Ignore package-lock.json (optional)
 # You might want to keep this file to ensure consistent installs across environments
