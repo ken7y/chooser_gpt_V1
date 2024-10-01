@@ -5,16 +5,33 @@ let touchElements: { [key: number]: HTMLElement } = {};
 let debounceTimeout: number | null = null;
 let loadingTimeout: number | null = null;
 let isLoading = false;
-
+let isSelected = false;
 // touchArea event listeners
 touchArea.addEventListener("touchstart", handleTouchStart, false);
 touchArea.addEventListener("touchmove", handleTouchMove, false);
 touchArea.addEventListener("touchend", handleTouchEnd, false);
 touchArea.addEventListener("touchcancel", handleTouchEnd, false);
 
+const resetButton = document.getElementById("resetButton");
+resetButton &&
+  resetButton.addEventListener("click", () => {
+    resetApp();
+    resetButton.classList.add("scale-animation");
+    resetButton.addEventListener(
+      "animationend",
+      () => {
+        resetButton.classList.remove("scale-animation");
+      },
+      { once: true }
+    );
+  });
+
 // Handle touch start event
 function handleTouchStart(event: TouchEvent) {
   event.preventDefault();
+  if (isSelected === true) {
+    return resetApp();
+  }
   if (isLoading) {
     cancelLoading();
   }
@@ -70,7 +87,7 @@ function handleTouchEnd(event: TouchEvent) {
       (t) => t.identifier !== touch.identifier
     );
 
-    if (currentTouches.length === 0){
+    if (currentTouches.length === 0) {
       resetApp();
     }
   }
@@ -123,6 +140,7 @@ function selectRandomFinger() {
 
   if (touchElement) {
     touchElement.classList.add("selected");
+    isSelected = true;
     for (let touch of currentTouches) {
       if (touch.identifier !== selectedTouch.identifier) {
         const otherElement = touchElements[touch.identifier];
@@ -150,9 +168,9 @@ function resetApp() {
     loadingTimeout = null;
   }
   isLoading = false;
-
-  for (let identifier in touchElements) {
-    const touchElement = touchElements[identifier];
+  isSelected = false;
+  for (let touch of currentTouches) {
+    const touchElement = touchElements[touch.identifier];
     if (touchElement && touchElement.parentNode) {
       touchArea.removeChild(touchElement);
     }

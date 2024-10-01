@@ -5,14 +5,27 @@ var touchElements = {};
 var debounceTimeout = null;
 var loadingTimeout = null;
 var isLoading = false;
+var isSelected = false;
 // touchArea event listeners
 touchArea.addEventListener("touchstart", handleTouchStart, false);
 touchArea.addEventListener("touchmove", handleTouchMove, false);
 touchArea.addEventListener("touchend", handleTouchEnd, false);
 touchArea.addEventListener("touchcancel", handleTouchEnd, false);
+var resetButton = document.getElementById("resetButton");
+resetButton &&
+    resetButton.addEventListener("click", function () {
+        resetApp();
+        resetButton.classList.add("scale-animation");
+        resetButton.addEventListener("animationend", function () {
+            resetButton.classList.remove("scale-animation");
+        }, { once: true });
+    });
 // Handle touch start event
 function handleTouchStart(event) {
     event.preventDefault();
+    if (isSelected === true) {
+        return resetApp();
+    }
     if (isLoading) {
         cancelLoading();
     }
@@ -104,6 +117,7 @@ function selectRandomFinger() {
     var touchElement = touchElements[selectedTouch.identifier];
     if (touchElement) {
         touchElement.classList.add("selected");
+        isSelected = true;
         for (var _i = 0, currentTouches_1 = currentTouches; _i < currentTouches_1.length; _i++) {
             var touch = currentTouches_1[_i];
             if (touch.identifier !== selectedTouch.identifier) {
@@ -128,8 +142,10 @@ function resetApp() {
         loadingTimeout = null;
     }
     isLoading = false;
-    for (var identifier in touchElements) {
-        var touchElement = touchElements[identifier];
+    isSelected = false;
+    for (var _i = 0, currentTouches_2 = currentTouches; _i < currentTouches_2.length; _i++) {
+        var touch = currentTouches_2[_i];
+        var touchElement = touchElements[touch.identifier];
         if (touchElement && touchElement.parentNode) {
             touchArea.removeChild(touchElement);
         }
@@ -148,8 +164,8 @@ function resetAnimations() {
             }, 0);
         }
     };
-    for (var _i = 0, currentTouches_2 = currentTouches; _i < currentTouches_2.length; _i++) {
-        var touch = currentTouches_2[_i];
+    for (var _i = 0, currentTouches_3 = currentTouches; _i < currentTouches_3.length; _i++) {
+        var touch = currentTouches_3[_i];
         _loop_2(touch);
     }
 }

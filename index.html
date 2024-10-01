@@ -1,85 +1,99 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Random Finger Selector</title>
-  <style>
-    /* Existing CSS styles */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    #touchArea {
-      width: 100%;
-      height: 100%;
-      background-color: #f0f0f0;
-      position: relative;
-      overflow: hidden;
-      touch-action: none; /* Prevent default touch actions */
-    }
-    .touch-point {
-      width: 50px;
-      height: 50px;
-      background-color: rgba(0, 150, 136, 0.7);
-      border-radius: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      animation: pulse 1s infinite; /* Initial pulsating animation */
-    }
-    @keyframes pulse {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
+  <head>
+    <title>Flyp - Web</title>
+    <link rel="icon" href="images/favicon.png" type="image/png"> 
+    <style>
+      /* Existing CSS styles */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
       }
-      50% {
-        transform: translate(-50%, -50%) scale(13);
+      #touchArea {
+        width: 100%;
+        height: 100%;
+        background-color: #f0f0f0;
+        position: relative;
+        overflow: hidden;
+        touch-action: none; /* Prevent default touch actions */
       }
-      100% {
-        transform: translate(-50%, -50%) scale(1);
+      .touch-point {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 150, 136, 0.7);
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        animation: pulse 1s infinite; /* Initial pulsating animation */
       }
-    }
-    @keyframes loading {
-      0% {
-        transform: translate(-50%, -50%) scale(1);
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(13);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
       }
-      100% {
-        transform: translate(-50%, -50%) scale(10);
+      .selected {
+        background-color: #80ef80 !important;
+        width: 500px;
+        height: 500px;
+        transform: translate(-50%, -50%);
+        animation: none;
+        z-index: 10;
       }
-    }
-    .selected {
-      background-color: #80EF80 !important;
-      width: 500px;
-      height: 500px;
-      transform: translate(-50%, -50%);
-      animation: none;
-      z-index: 10;
-    }
-    /* Style for the reset button */
-    #resetButton {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 100;
-      padding: 50px 100px;
-      font-size: 16px;
-      background-color: blue;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    #resetButton:hover {
-      background-color: #e64a19;
-    }
-  </style>
-</head>
-<body>
-  <!-- Add the Reset button -->
-  <!-- <button id="resetButton">Reset</button> -->
+      /* Style for the reset button */
+      @keyframes scaleOut {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2); /* Scale out to 1.2 */
+        }
+        100% {
+          transform: scale(1); /* Scale back to original size */
+        }
+      }
 
-  <!-- The touch area -->
-  <div id="touchArea"></div>
+      /* Style for the reset button */
+      #resetButton {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 100;
+        padding: 50px 80px;
+        font-size: 16px;
+        background-color: #eb6e47;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-  <!-- Include your JavaScript at the end of the body -->
-  <script src="app.js"></script>
-</body>
+      #resetButton:hover {
+        background-color: #e64a19;
+      }
+
+      /* Class to trigger the scale animation */
+      .scale-animation {
+        animation: scaleOut 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add the Reset button -->
+    <button id="resetButton">Reset</button>
+
+    <!-- The touch area -->
+    <div id="touchArea"></div>
+
+    <!-- Include your JavaScript at the end of the body -->
+    <script src="app.js"></script>
+  </body>
 </html>
