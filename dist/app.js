@@ -57,6 +57,9 @@ function handleTouchEnd(event) {
             delete touchElements[touch.identifier];
         }
         currentTouches = currentTouches.filter(function (t) { return t.identifier !== touch.identifier; });
+        if (currentTouches.length === 0) {
+            resetApp();
+        }
     };
     for (var i = 0; i < event.changedTouches.length; i++) {
         _loop_1(i);

@@ -69,6 +69,10 @@ function handleTouchEnd(event: TouchEvent) {
     currentTouches = currentTouches.filter(
       (t) => t.identifier !== touch.identifier
     );
+
+    if (currentTouches.length === 0){
+      resetApp();
+    }
   }
 
   resetDebounceTimer();
