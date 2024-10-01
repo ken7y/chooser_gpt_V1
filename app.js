@@ -78,7 +78,7 @@ function resetDebounceTimer() {
   }
 
   debounceTimeout = setTimeout(() => {
-    if (currentTouches.length > 1) {
+    if (currentTouches.length > 0) {
       startLoadingAnimation();
     }
   }, 1000);
@@ -88,13 +88,13 @@ function startLoadingAnimation() {
   isLoading = true;
   debounceTimeout = null;
 
-  for (let touch of currentTouches) {
-    const touchElement = touchElements[touch.identifier];
-    if (touchElement) {
-      touchElement.classList.add('loading');
-      touchElement.classList.remove('touch-point'); // Remove initial animation
-    }
-  }
+  // for (let touch of currentTouches) {
+  //   const touchElement = touchElements[touch.identifier];
+  //   if (touchElement) {
+  //     touchElement.classList.add('loading');
+  //     touchElement.classList.remove('touch-point'); // Remove initial animation
+  //   }
+  // }
 
   loadingTimeout = setTimeout(() => {
     if (isLoading) {
@@ -130,7 +130,6 @@ function selectRandomFinger() {
   const touchElement = touchElements[selectedTouch.identifier];
 
   if (touchElement) {
-    touchElement.classList.remove('loading');
     touchElement.style.transform = 'translate(-50%, -50%) scale(1)';
     touchElement.style.animation = 'none';
     touchElement.classList.add('selected');
@@ -145,17 +144,17 @@ function selectRandomFinger() {
       }
     }
 
-    setTimeout(() => {
-      if (touchElement.parentNode) {
-        touchArea.removeChild(touchElement);
-        delete touchElements[selectedTouch.identifier];
-      }
-    }, 3000);
+    // setTimeout(() => {
+    //   if (touchElement.parentNode) {
+    //     touchArea.removeChild(touchElement);
+    //     delete touchElements[selectedTouch.identifier];
+    //   }
+    // }, 10000);
   }
 
   currentTouches = currentTouches.filter(t => t.identifier === selectedTouch.identifier);
 
-  alert(`Selected finger at position: (${selectedTouch.clientX}, ${selectedTouch.clientY})`);
+  // alert(`Selected finger at position: (${selectedTouch.clientX}, ${selectedTouch.clientY})`);
 }
 
 function resetApp() {
