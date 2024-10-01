@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",   // Specify the output directory for compiled JS files
+    "rootDir": "./",      // Specify the root directory of your source code
+    "strict": true        // Enable strict type-checking options
+  },
+  "include": ["app.ts"]   // Include specific files to compile
+}
