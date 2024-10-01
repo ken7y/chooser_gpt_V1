@@ -130,6 +130,8 @@ function selectRandomFinger() {
   const touchElement = touchElements[selectedTouch.identifier];
 
   if (touchElement) {
+    touchElement.style.transform = 'translate(-50%, -50%) scale(7)';
+    touchElement.style.animation = 'none';
     touchElement.classList.add('selected');
 
     for (let touch of currentTouches) {
@@ -141,13 +143,6 @@ function selectRandomFinger() {
         }
       }
     }
-
-    // setTimeout(() => {
-    //   if (touchElement.parentNode) {
-    //     touchArea.removeChild(touchElement);
-    //     delete touchElements[selectedTouch.identifier];
-    //   }
-    // }, 10000);
   }
 
   currentTouches = currentTouches.filter(t => t.identifier === selectedTouch.identifier);
