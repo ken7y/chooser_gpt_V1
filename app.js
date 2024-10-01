@@ -1,4 +1,4 @@
-const touchArea = document.getElementById('touchArea');
+const touchArea = document.getElementById("touchArea");
 
 let currentTouches = [];
 let touchElements = {};
@@ -7,15 +7,15 @@ let loadingTimeout = null;
 let isLoading = false;
 
 // Get reference to the reset button
-const resetButton = document.getElementById('resetButton');
+const resetButton = document.getElementById("resetButton");
 
 // Attach event listener to the reset button
-resetButton.addEventListener('click', resetApp);
+resetButton.addEventListener("click", resetApp);
 
-touchArea.addEventListener('touchstart', handleTouchStart, false);
-touchArea.addEventListener('touchmove', handleTouchMove, false);
-touchArea.addEventListener('touchend', handleTouchEnd, false);
-touchArea.addEventListener('touchcancel', handleTouchEnd, false);
+touchArea.addEventListener("touchstart", handleTouchStart, false);
+touchArea.addEventListener("touchmove", handleTouchMove, false);
+touchArea.addEventListener("touchend", handleTouchEnd, false);
+touchArea.addEventListener("touchcancel", handleTouchEnd, false);
 
 function handleTouchStart(event) {
   event.preventDefault();
@@ -27,13 +27,12 @@ function handleTouchStart(event) {
   }
 
   for (let touch of event.changedTouches) {
-    const touchElement = document.createElement('div');
-    touchElement.classList.add('touch-point');
+    const touchElement = document.createElement("div");
+    touchElement.classList.add("touch-point");
     touchElement.style.left = `${touch.clientX}px`;
     touchElement.style.top = `${touch.clientY}px`;
     touchElement.id = `touch-${touch.identifier}`;
     touchArea.appendChild(touchElement);
-
     currentTouches.push(touch);
     touchElements[touch.identifier] = touchElement;
   }
@@ -68,7 +67,9 @@ function handleTouchEnd(event) {
       delete touchElements[touch.identifier];
     }
 
-    currentTouches = currentTouches.filter(t => t.identifier !== touch.identifier);
+    currentTouches = currentTouches.filter(
+      (t) => t.identifier !== touch.identifier
+    );
   }
 
   resetDebounceTimer();
@@ -124,7 +125,7 @@ function selectRandomFinger() {
   if (touchElement) {
     // touchElement.style.transform = 'translate(-50%, -50%) scale(7)';
     // touchElement.style.animation = 'none';
-    touchElement.classList.add('selected');
+    touchElement.classList.add("selected");
 
     for (let touch of currentTouches) {
       if (touch.identifier !== selectedTouch.identifier) {
@@ -137,7 +138,9 @@ function selectRandomFinger() {
     }
   }
 
-  currentTouches = currentTouches.filter(t => t.identifier === selectedTouch.identifier);
+  currentTouches = currentTouches.filter(
+    (t) => t.identifier === selectedTouch.identifier
+  );
 
   // alert(`Selected finger at position: (${selectedTouch.clientX}, ${selectedTouch.clientY})`);
 }
@@ -169,13 +172,14 @@ function resetApp() {
   currentTouches = [];
 }
 
-
 function resetAnimations() {
-  for (let id in touchElements) {
+  for (let id in currentTouches) {
     const touchElement = touchElements[id];
     if (touchElement) {
-      touchElement.style.animationDuration = '0s'
-      touchElement.style.animationDuration = '2s';
+      touchElement.style.animationDuration = "0s";
+      setTimeout(() => {
+        touchElement.style.animationDuration = "2s";
+      }, 0);
     }
   }
 }
