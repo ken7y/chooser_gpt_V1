@@ -1,5 +1,4 @@
 # Ignore the dist directory, where compiled files go
-dist/
 
 # Ignore the node_modules directory, which contains dependencies
 node_modules/
