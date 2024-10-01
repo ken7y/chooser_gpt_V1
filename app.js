@@ -19,6 +19,7 @@ touchArea.addEventListener('touchcancel', handleTouchEnd, false);
 
 function handleTouchStart(event) {
   event.preventDefault();
+  resetAnimations();
 
   if (isLoading) {
     // Cancel loading if touch points change
@@ -54,6 +55,7 @@ function handleTouchMove(event) {
 
 function handleTouchEnd(event) {
   event.preventDefault();
+  resetAnimations();
 
   if (isLoading) {
     cancelLoading();
@@ -165,4 +167,15 @@ function resetApp() {
   // Clear touch elements and current touches
   touchElements = {};
   currentTouches = [];
+}
+
+
+function resetAnimations() {
+  for (let id in touchElements) {
+    const touchElement = touchElements[id];
+    if (touchElement) {
+      touchElement.style.animationDuration = '0s'
+      touchElement.style.animationDuration = '2s';
+    }
+  }
 }
