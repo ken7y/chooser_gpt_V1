@@ -1,4 +1,3 @@
-// Include the updated JavaScript from above
 const touchArea = document.getElementById('touchArea');
 
 let currentTouches = [];
@@ -77,8 +76,10 @@ function selectRandomFinger(touchList) {
   const touchElement = touchElements[selectedTouch.identifier];
 
   if (touchElement) {
+    // Add the 'selected' class to change its appearance
     touchElement.classList.add('selected');
 
+    // Remove other touch points
     for (let id in touchElements) {
       if (parseInt(id) !== selectedTouch.identifier) {
         touchArea.removeChild(touchElements[id]);
@@ -86,12 +87,14 @@ function selectRandomFinger(touchList) {
       }
     }
 
+    // Keep the selected touch point on screen for a while
     setTimeout(() => {
       if (touchElement.parentNode) {
         touchArea.removeChild(touchElement);
       }
-    }, 3000);
+    }, 3000); // Visible for 3 seconds
   }
 
-  alert(`Selected finger at position: (${selectedTouch.clientX}, ${selectedTouch.clientY})`);
+  // Alert the user
+//   alert(`Selected finger at position: (${selectedTouch.clientX}, ${selectedTouch.clientY})`);
 }
