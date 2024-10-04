@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Flyp - Web</title>
-    <link rel="icon" href="images/favicon.png" type="image/png"> 
+    <link rel="icon" href="images/favicon.png" type="image/png" />
     <style>
       /* Existing CSS styles */
       body,
@@ -20,23 +20,28 @@
         touch-action: none; /* Prevent default touch actions */
       }
       .touch-point {
-        width: 50px;
-        height: 50px;
+        width: 650px;
+        height: 650px;
         background-color: rgba(0, 150, 136, 0.7);
         border-radius: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
         animation: pulse 1s infinite; /* Initial pulsating animation */
+        /* backface-visibility: hidden; */
+        /* transform: translateZ(0); */
+        will-change: transform;
       }
       @keyframes pulse {
         0% {
-          transform: translate(-50%, -50%) scale(1);
+          /* scales down to 50px */
+          transform: translate(-50%, -50%) scale(0.07692);
         }
         50% {
-          transform: translate(-50%, -50%) scale(13);
+          /* scales 1 to 650px */
+          transform: translate(-50%, -50%) scale(1);
         }
         100% {
-          transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(0.07692);
         }
       }
       .selected {
@@ -89,6 +94,6 @@
     <div id="touchArea"></div>
 
     <!-- Include your JavaScript at the end of the body -->
-    <script src="app.js"></script>
+    <script src="dist/app.js"></script>
   </body>
 </html>

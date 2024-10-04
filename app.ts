@@ -25,6 +25,7 @@ resetButton &&
       { once: true }
     );
   });
+  
 
 // Handle touch start event
 function handleTouchStart(event: TouchEvent) {

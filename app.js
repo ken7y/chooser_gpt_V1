@@ -20,6 +20,24 @@ resetButton &&
             resetButton.classList.remove("scale-animation");
         }, { once: true });
     });
+function getCircleSvg(clientX, clientY, identifier) {
+    // Create the SVG element
+    var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgElement.setAttribute("width", "50");
+    svgElement.setAttribute("height", "50");
+    svgElement.setAttribute("viewBox", "0 0 50 50");
+    svgElement.style.position = "absolute";
+    svgElement.style.left = "".concat(clientX, "px");
+    svgElement.style.top = "".concat(clientY, "px");
+    svgElement.id = "touch-".concat(identifier);
+    // Create the circle element
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "25");
+    circle.setAttribute("cy", "25");
+    circle.setAttribute("r", "25");
+    circle.setAttribute("fill", "rgba(0, 150, 136, 0.7)");
+    return circle;
+}
 // Handle touch start event
 function handleTouchStart(event) {
     event.preventDefault();
@@ -32,11 +50,12 @@ function handleTouchStart(event) {
     for (var i = 0; i < event.changedTouches.length; i++) {
         var touch = event.changedTouches[i];
         var touchElement = document.createElement("div");
-        touchElement.classList.add("touch-point");
-        touchElement.style.left = "".concat(touch.clientX, "px");
-        touchElement.style.top = "".concat(touch.clientY, "px");
-        touchElement.id = "touch-".concat(touch.identifier);
-        touchArea.appendChild(touchElement);
+        // touchElement.classList.add("touch-point");
+        // touchElement.style.left = `${touch.clientX}px`;
+        // touchElement.style.top = `${touch.clientY}px`;
+        // touchElement.id = `touch-${touch.identifier}`;
+        // touchArea.appendChild(touchElement);
+        touchArea.appendChild(getCircleSvg(touch.clientX, touch.clientY, touch.identifier));
         currentTouches.push(touch);
         touchElements[touch.identifier] = touchElement;
     }
